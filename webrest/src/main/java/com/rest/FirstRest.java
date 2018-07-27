@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/")
 public class FirstRest {
 	@GET
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/hello")
 	public String sayHtmlHello() {
 		return this.addsomthing("Hello from REST");
