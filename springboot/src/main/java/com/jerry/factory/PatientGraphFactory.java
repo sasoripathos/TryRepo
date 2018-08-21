@@ -20,6 +20,7 @@ import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.TextAnchor;
@@ -47,10 +48,29 @@ public class PatientGraphFactory {
 		dataset.addValue(450, "lower bound", "02/10/2012");
 		JFreeChart lineChart = ChartFactory.createLineChart("abc", "date", "value", dataset,
 				PlotOrientation.VERTICAL, true,true,false);
-		
+		// set axis font
+		lineChart.getCategoryPlot().getDomainAxis().setLabelFont(new Font("Arial", Font.BOLD, 16));
+		lineChart.getCategoryPlot().getRangeAxis().setLabelFont(new Font("Arial", Font.BOLD, 16));
+		// set background
 		lineChart.getPlot().setBackgroundPaint(Color.white);
 		
-		BufferedImage buf = lineChart.createBufferedImage(700, 500);
+		// set legend font
+		lineChart.getLegend().setItemFont(new Font("Arial", Font.BOLD, 16));
+		lineChart.getCategoryPlot().getDomainAxis().setTickLabelFont(new Font("Arial", Font.BOLD, 16));
+		lineChart.getCategoryPlot().getRangeAxis().setTickLabelFont(new Font("Arial", Font.BOLD, 16));
+		
+		CategoryItemRenderer renderer = lineChart.getCategoryPlot().getRenderer();
+		//()renderer.set
+		((LineAndShapeRenderer) renderer).setDefaultShapesVisible(true);
+		// set label for data
+		((LineAndShapeRenderer) renderer).setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+		((LineAndShapeRenderer) renderer).setDefaultItemLabelsVisible(true);
+		((LineAndShapeRenderer) renderer).setDefaultItemLabelFont(new Font("Arial", Font.BOLD, 16));
+		//ItemLabelPosition position = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.TOP_CENTER);
+		//renderer.setDefaultPositiveItemLabelPosition(position); 
+		
+		// Set size
+		BufferedImage buf = lineChart.createBufferedImage(900, 600);
 		//Graphics2D g = buf.createGraphics();
 		//g.setColor(Color.WHITE);
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
