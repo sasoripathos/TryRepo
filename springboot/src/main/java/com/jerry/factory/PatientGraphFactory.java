@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/graphs")
-public class LineGraphFactory {
+public class PatientGraphFactory {
 	@RequestMapping(value="/line", method = RequestMethod.GET, produces = "image/png")
 	public @ResponseBody byte[] getLineGraph() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -91,6 +91,9 @@ public class LineGraphFactory {
 		CategoryItemRenderer renderer = barChart.getCategoryPlot().getRenderer();
 		// set maximum width of a bar
 		((BarRenderer) renderer).setMaximumBarWidth(0.15);
+		
+		// set maximum margin between items
+		((BarRenderer) renderer).setItemMargin(0.05);
 		
 		// set bar lable number and font
 		renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
