@@ -6,6 +6,12 @@ public class PatientGraphDataPack {
 	private List<String> labels;
 	private List<GraphDataSet> datasets;
 	
+	public PatientGraphDataPack(List<String> labels, List<GraphDataSet> datasets) {
+		super();
+		this.labels = labels;
+		this.datasets = datasets;
+	}
+	
 	public List<String> getLabels() {
 		return labels;
 	}
