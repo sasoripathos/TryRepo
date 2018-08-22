@@ -2,12 +2,9 @@ package com.jerry.factory;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +22,6 @@ import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,8 +67,6 @@ public class PatientGraphFactory {
 		
 		// Set size
 		BufferedImage buf = lineChart.createBufferedImage(900, 600);
-		//Graphics2D g = buf.createGraphics();
-		//g.setColor(Color.WHITE);
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		try {
 			ImageIO.write(buf, "png", outStream);

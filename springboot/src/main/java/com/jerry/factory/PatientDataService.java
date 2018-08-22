@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jerry.exception.ExceptionResponse;
+import com.jerry.exception.InvalidIdException;
 import com.jerry.graphdata.BarDataSet;
 import com.jerry.graphdata.GraphDataSet;
 import com.jerry.graphdata.PatientGraphDataPack;
@@ -18,7 +27,10 @@ import com.jerry.graphdata.PatientGraphDataPack;
 @RequestMapping("/patient_data")
 public class PatientDataService {
 	@GetMapping("/{id}")
-	public PatientGraphDataPack getOneTestResult(@PathVariable int id, @RequestParam("field") String field) {
+	public PatientGraphDataPack getOneTestResult(@PathVariable int id, @RequestParam("field") String field) throws InvalidIdException {
+		if (id <= 0) {
+			throw new InvalidIdException("Invalid ID: ID should be non-negative");
+		}
 		List<String> lables = new ArrayList<String>();
 		lables.add(field);
 		List<GraphDataSet> datasets = new ArrayList<GraphDataSet>();
@@ -43,5 +55,13 @@ public class PatientDataService {
 		datas.add(value);
 		GraphDataSet a = new BarDataSet(lable, datas, "#112233", "#223344");
 		return a;
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ExceptionResponse> invalidIdResponse(InvalidIdException excep) {
+		ExceptionResponse resp = new ExceptionResponse();
+		resp.setStatus(HttpStatus.BAD_REQUEST.value());
+		resp.setMessage(excep.getMessage());
+		return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
 	}
 }
