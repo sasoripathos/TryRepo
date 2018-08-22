@@ -8,6 +8,11 @@ import java.util.List;
 
 
 
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jerry.config.BarChartConfig;
 import com.jerry.exception.ExceptionResponse;
 import com.jerry.exception.InvalidIdException;
 import com.jerry.graphdata.BarDataSet;
@@ -26,6 +32,9 @@ import com.jerry.graphdata.PatientGraphDataPack;
 @RestController
 @RequestMapping("/patient_data")
 public class PatientDataService {
+	@Autowired
+	private BarChartConfig barChartConfig;
+	
 	@GetMapping("/{id}")
 	public PatientGraphDataPack getOneTestResult(@PathVariable int id, @RequestParam("field") String field) throws InvalidIdException {
 		if (id <= 0) {
@@ -46,14 +55,14 @@ public class PatientDataService {
 		datas.add(1);
 		datas.add(2);
 		datas.add(3);
-		GraphDataSet a = new BarDataSet("testset", datas, "#112233", "#223344");
+		GraphDataSet a = new BarDataSet("testset", datas, barChartConfig.getBorderColor(), barChartConfig.getBackgroundColor());
 		return a;
 	}
 	
 	public GraphDataSet getSampleDataSet(String lable, Number value) {
 		List<Number> datas = new ArrayList<Number>();
 		datas.add(value);
-		GraphDataSet a = new BarDataSet(lable, datas, "#112233", "#223344");
+		GraphDataSet a = new BarDataSet(lable, datas, barChartConfig.getBorderColor(), barChartConfig.getBackgroundColor());
 		return a;
 	}
 	
