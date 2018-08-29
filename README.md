@@ -2,5 +2,7 @@
 repository for learn new skill
 ## webrest
 a project for java rest api practice
-## Jenkins script
-a folder for Jenkins related tools
+## springboot
+a Spring Boot project for Spring Boot and JFreeChart practice
+## spring_graph
+a Spring project for normal spring practice
