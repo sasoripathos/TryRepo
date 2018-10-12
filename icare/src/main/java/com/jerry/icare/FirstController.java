@@ -1,13 +1,10 @@
 package com.jerry.icare;
 
-import org.springframework.http.MediaType;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FirstController {
@@ -17,8 +14,10 @@ public class FirstController {
 		return "index";
 	}
 	
-	@GetMapping("/login")
-	public String login(@RequestParam String username, @RequestParam String password) {
+	@PostMapping("/login")
+	public String login(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		System.out.println("Username: " + username);
 		System.out.println("Password: " + password);
 		if(username.equals("admin")&& password.equals("12345")) {
