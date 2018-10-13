@@ -8,6 +8,7 @@
 	<body>
 		<p>This is report page.</p>
 		<p>${user}</p>
+		<p>${loginUser.name}</p>
 		<form action="/back" method="post">
 			<button type="submit">Back</button>
 		</form>

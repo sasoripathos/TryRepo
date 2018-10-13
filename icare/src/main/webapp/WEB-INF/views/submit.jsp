@@ -8,6 +8,7 @@
 	<body>
 		<p>This is sumbission page.</p>
 		<p>Hello ${user}</p>
+		<p>${loginUser.name}</p>
 		<form action="/submission" method="post">
 			<button type="submit">Report</button>
 		</form>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,10 +9,12 @@
 	<body>
 		<h2>Hello World!</h2>
 		<p>Welcome to iCare, please login.</p>
-		<form action="/login" method="POST">
-			<input type="text" id="username" name="username" placeholder="please enter your username"/>
-			<input type="password" id="password" name="password" placeholder="Please enter your password"/>
-			<input type="submit"/>
-		</form>
+		<form:form action="/login" method="POST" modelAttribute="loginUser">
+			Email: <form:input path="email" placeholder="please enter your username"/>
+			<br><br>
+			Password: <form:input type="password" path="password" placeholder="Please enter your password"/>
+			<br><br>
+			<input type="submit" value="submit"/>
+		</form:form>
 	</body>
 </html>
